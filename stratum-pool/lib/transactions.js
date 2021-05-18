@@ -249,9 +249,11 @@ exports.CreateGeneration = function(rpcData, publicKey, extraNoncePlaceholder, r
         util.serializeNumber(Date.now() / 1000 | 0),
         new Buffer([extraNoncePlaceholder.length])
     ]);
-
-    var scriptSigPart2 = util.serializeString('/nodeStratum/');
-
+    
+    var buf1 = new Buffer(rpcData.mam.aux_data,'hex');
+    var buf2 = util.serializeString('/nodeStratum/');
+    var scriptSigPart2 = Buffer.concat([buf1,buf2],buf1.length + buf2.length);
+    
     var p1 = Buffer.concat([
         util.packUInt32LE(txVersion),
         txTimestamp,

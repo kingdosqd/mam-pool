@@ -136,11 +136,11 @@ var JobManager = module.exports = function JobManager(options){
             isNewBlock = true;
 
             //If new block is outdated/out-of-sync than return
-            if (rpcData.height < _this.currentJob.rpcData.height)
+            if (rpcData.height < _this.currentJob.rpcData.height && rpcData.mam.aux_data == _this.currentJob.rpcData.mam.aux_data)
                 return false;
         }
 
-        if (!isNewBlock) return false;
+        if (!isNewBlock && rpcData.mam.aux_data == _this.currentJob.rpcData.mam.aux_data) return false;
 
 
         var tmpBlockTemplate = new blockTemplate(
@@ -225,6 +225,12 @@ var JobManager = module.exports = function JobManager(options){
 
         var blockDiffAdjusted = job.difficulty * shareMultiplier;
 
+        var mam_target = util.bignumFromBitsHex(job.rpcData.mam.bits)
+        var mam_submit = false;
+        if (mam_target.ge(headerBigNum)){
+            mam_submit = true;
+        }
+
         //Check if share is a block candidate (matched network difficulty)
         if (job.target.ge(headerBigNum)){
             blockHex = job.serializeBlock(headerBuffer, coinbaseBuffer).toString('hex');
@@ -266,7 +272,16 @@ var JobManager = module.exports = function JobManager(options){
             blockDiff : blockDiffAdjusted,
             blockDiffActual: job.difficulty,
             blockHash: blockHash,
-            blockHashInvalid: blockHashInvalid
+            blockHashInvalid: blockHashInvalid,
+            mam_submit : mam_submit,
+            prevblockhash : job.rpcData.mam.prevblockhash,
+            mam_data : job.rpcData.mam.mam_data,
+            btc80 : headerBuffer,
+            coinbase : coinbaseBuffer,
+            coinbaseindex : job.generationTransaction[0].length + 8,
+            merkle_branch_aux : [],
+            merkle_branch : job.merkleBranch
+
         }, blockHex);
 
         return {result: true, error: null, blockHash: blockHash};

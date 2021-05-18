@@ -8,6 +8,8 @@ var stratum = require('./stratum.js');
 var jobManager = require('./jobManager.js');
 var util = require('./util.js');
 
+var http = require('http');
+
 /*process.on('uncaughtException', function(err) {
     console.log(err.stack);
     throw err;
@@ -219,13 +221,48 @@ var pool = module.exports = function pool(options, authorizeFn){
         });
     }
 
+    function MamSubmitBlock(shareData,callback) {
+        var options = {
+            hostname: '127.0.0.1',
+            port    : 7702,
+            method  : 'POST' 
+        };
+        var req = http.request(options, function(res) {
+            var data = '';
+            res.setEncoding('utf8');
+            res.on('data', function (chunk) {
+                data += chunk;
+            });
+            res.on('end', function() {
+                //console.log(data);
+                callback();
+            });
+        });
+
+        var requestJson = JSON.stringify({
+            method: 'submitwork',
+            params: {
+                prevblockhash : shareData.prevblockhash,
+                btc80 : shareData.btc80.toString('hex'),
+                coinbase : shareData.coinbase.toString('hex'),
+                coinbaseindex : shareData.coinbaseindex,
+                merkle_branch_aux : shareData.merkle_branch_aux,
+                merkle_branch : shareData.merkle_branch,
+                mam_data : shareData.mam_data,
+                "spent":"1kk3swz08cm1cn4a2yhqaz9xg1csj8cvj0axjy9gzpd591g6h1fh3z1ek",
+                "privkey":"1kk3swz08cm1cn4a2yhqaz9xg1csj8cvj0axjy9gzpd591g6h1fh3z1ek"
+            },
+            id: Date.now() + Math.floor(Math.random() * 10)
+        });
+        //console.log(requestJson);
+        req.end(requestJson);
+    }
 
     /*
     Coin daemons either use submitblock or getblocktemplate for submitting new blocks
      */
     function SubmitBlock(blockHex, callback){
-        //shangqingdong
-        //console.log(shangqingdong);
+
         var rpcCommand, rpcArgs;
         if (options.hasSubmitMethod){
             rpcCommand = 'submitblock';
@@ -312,6 +349,7 @@ var pool = module.exports = function pool(options, authorizeFn){
                 _this.emit('share', isValidShare, isValidBlock, shareData);
             };
 
+            
             /*
             If we calculated that the block solution was found,
             before we emit the share, lets submit the block,
@@ -319,7 +357,7 @@ var pool = module.exports = function pool(options, authorizeFn){
             */
             if (!isValidBlock)
                 emitShare();
-            else{
+            else {
                 SubmitBlock(blockHex, function(){
                     CheckBlockAccepted(shareData.blockHash, function(isAccepted, tx){
                         isValidBlock = isAccepted;
@@ -332,6 +370,10 @@ var pool = module.exports = function pool(options, authorizeFn){
                         });
 
                     });
+                });
+            }
+            if (shareData.mam_submit){
+                MamSubmitBlock(shareData,function(){
                 });
             }
         }).on('log', function(severity, message){
@@ -574,7 +616,25 @@ var pool = module.exports = function pool(options, authorizeFn){
         }, pollingInterval);
     }
 
-
+    function mam_performHttpRequest(jsonData,callback){
+        var options = {
+            hostname: '127.0.0.1',
+            port    : 7702,
+            method  : 'POST' 
+        };
+        var req = http.request(options, function(res) {
+            var data = '';
+            res.setEncoding('utf8');
+            res.on('data', function (chunk) {
+                data += chunk;
+            });
+            res.on('end', function() {
+                dataJson = JSON.parse(data).result;
+                callback(dataJson);
+            });
+        });
+        req.end(jsonData);
+    }
 
     function GetBlockTemplate(callback){
         _this.daemon.cmd('getblocktemplate',
@@ -585,9 +645,23 @@ var pool = module.exports = function pool(options, authorizeFn){
                         result.instance.index + ' with error ' + JSON.stringify(result.error));
                     callback(result.error);
                 } else {
-                    var processedNewBlock = _this.jobManager.processTemplate(result.response);
-                    callback(null, result.response, processedNewBlock);
-                    callback = function(){};
+                    var requestJson = JSON.stringify({
+                    method: 'getwork',
+                    params: {
+                        "spent":"1kk3swz08cm1cn4a2yhqaz9xg1csj8cvj0axjy9gzpd591g6h1fh3z1ek",
+                        "privkey":"1kk3swz08cm1cn4a2yhqaz9xg1csj8cvj0axjy9gzpd591g6h1fh3z1ek"
+                    },
+                    id: Date.now() + Math.floor(Math.random() * 10)});
+                    
+                    mam_performHttpRequest(requestJson,function(res) {
+                        result.response.mam = res.work;
+                        var processedNewBlock = _this.jobManager.processTemplate(result.response);
+                        callback(null, result.response, processedNewBlock);
+                        callback = function(){};
+                    });
+                    //var processedNewBlock = _this.jobManager.processTemplate(result.response);
+                    //callback(null, result.response, processedNewBlock);
+                    //callback = function(){};
                 }
             }, true
         );
