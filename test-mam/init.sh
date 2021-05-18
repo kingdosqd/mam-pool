@@ -20,4 +20,4 @@ minemon-cli addnewtemplate mintredeem '{"owner": "1j6x8vdkkbnxe8qwjggfan9c8m8zhm
 # 21g02epzpp8txzbtg44t6stf78djkwt2cz5w61mvsy1t00ddywwks3b68
 
 # 给挖矿地址投票
-minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf 21c0ccarf3kpr87r2peet1p1ngsmsze8qdsmza6kmws9fz6k0v9y7fmnc 100
+#minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf 21c0ccarf3kpr87r2peet1p1ngsmsze8qdsmza6kmws9fz6k0v9y7fmnc 100
