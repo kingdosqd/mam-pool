@@ -1,0 +1,75 @@
+{
+    "enabled": true,
+    "coin": "bitcoin.json",
+    "address": "mxiS75xsecpxSy9SjoDtRbtNMVyrXYP9yi",
+    "rewardRecipients": { 
+        "myNUrq3gy72GDU5LiyfdqDhyRHKWhfR6BU": 1.5,
+        "mp4GGRTjKTyqkrsm16nXh2q7D9RYTqNdGv": 0.1},
+    "paymentProcessing": {
+        "enabled": false,
+        "paymentInterval": 20,
+        "minimumPayment": 70,
+        "daemon": {
+            "host": "127.0.0.1",
+            "port": 18332,
+            "user": "testuser",
+            "password": "testpass"
+        }
+    },
+    "ports": {
+        "3008": {
+            "diff": 1,
+            "varDiff": {
+                "minDiff": 0.1,
+                "maxDiff": 512,
+                "targetTime": 15,
+                "retargetTime": 90,
+                "variancePercent": 30
+            }
+        },
+        "3032": {
+            "diff": 32,
+            "varDiff": {
+                "minDiff": 8,
+                "maxDiff": 512,
+                "targetTime": 15,
+                "retargetTime": 90,
+                "variancePercent": 30
+            }
+        },
+        "3256": {
+            "diff": 256
+        }
+    },
+    "daemons": [
+        {
+            "host": "127.0.0.1",
+            "port": 18332,
+            "user": "testuser",
+            "password": "testpass",
+            "mam":
+            {
+                "host": "127.0.0.1",
+                "port": 7702,
+                "spent":"1j6x8vdkkbnxe8qwjggfan9c8m8zhmez7gm3pznsqxgch3eyrwxby8eda",
+                "privkey":"28efbfda61b473c37549d02784648d89fe21ff082b7a42da9ef97b0b83cdb1a9"
+            }
+        }
+    ],
+    "p2p": {
+        "enabled": false,
+        "host": "127.0.0.1",
+        "port": 19333,
+        "disableTransactions": true
+    },
+    "mposMode": {
+        "enabled": false,
+        "host": "127.0.0.1",
+        "port": 3306,
+        "user": "me",
+        "password": "mypass",
+        "database": "ltc",
+        "checkPassword": true,
+        "autoCreateWorker": false
+    }
+}

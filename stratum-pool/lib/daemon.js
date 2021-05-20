@@ -185,6 +185,7 @@ function DaemonInterface(daemons, logger){
     this.isOnline = isOnline;
     this.cmd = cmd;
     this.batchCmd = batchCmd;
+    this.instances = instances;
 }
 
 DaemonInterface.prototype.__proto__ = events.EventEmitter.prototype;

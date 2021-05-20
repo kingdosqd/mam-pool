@@ -223,8 +223,8 @@ var pool = module.exports = function pool(options, authorizeFn){
 
     function MamSubmitBlock(shareData,callback) {
         var options = {
-            hostname: '127.0.0.1',
-            port    : 7702,
+            hostname: _this.daemon.instances[0].mam.host,
+            port    : _this.daemon.instances[0].mam.port,
             method  : 'POST' 
         };
         var req = http.request(options, function(res) {
@@ -249,8 +249,8 @@ var pool = module.exports = function pool(options, authorizeFn){
                 merkle_branch_aux : shareData.merkle_branch_aux,
                 merkle_branch : shareData.merkle_branch,
                 mam_data : shareData.mam_data,
-                "spent":"1kk3swz08cm1cn4a2yhqaz9xg1csj8cvj0axjy9gzpd591g6h1fh3z1ek",
-                "privkey":"1kk3swz08cm1cn4a2yhqaz9xg1csj8cvj0axjy9gzpd591g6h1fh3z1ek"
+                spent : _this.daemon.instances[0].mam.spent,
+                privkey : _this.daemon.instances[0].mam.privkey
             },
             id: Date.now() + Math.floor(Math.random() * 10)
         });
@@ -618,8 +618,8 @@ var pool = module.exports = function pool(options, authorizeFn){
 
     function mam_performHttpRequest(jsonData,callback){
         var options = {
-            hostname: '127.0.0.1',
-            port    : 7702,
+            hostname: _this.daemon.instances[0].mam.host,
+            port    : _this.daemon.instances[0].mam.port,
             method  : 'POST' 
         };
         var req = http.request(options, function(res) {
@@ -648,8 +648,8 @@ var pool = module.exports = function pool(options, authorizeFn){
                     var requestJson = JSON.stringify({
                     method: 'getwork',
                     params: {
-                        "spent":"1kk3swz08cm1cn4a2yhqaz9xg1csj8cvj0axjy9gzpd591g6h1fh3z1ek",
-                        "privkey":"1kk3swz08cm1cn4a2yhqaz9xg1csj8cvj0axjy9gzpd591g6h1fh3z1ek"
+                        spent : _this.daemon.instances[0].mam.spent,
+                        privkey : _this.daemon.instances[0].mam.privkey
                     },
                     id: Date.now() + Math.floor(Math.random() * 10)});
                     
