@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#sha256address=1j6x8vdkkbnxe8qwjggfan9c8m8zhmez7gm3pznsqxgch3eyrwxby8eda
+#sha256key=28efbfda61b473c37549d02784648d89fe21ff082b7a42da9ef97b0b83cdb1a9
+
 import subprocess
 import json
 import time
