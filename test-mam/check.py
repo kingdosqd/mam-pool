@@ -41,13 +41,17 @@ class Tx(Base):
 def TestWork():
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
-    Txs = session.query(Tx).filter(Tx.type == 'work').all()
-    height = 1
+    Txs = session.query(Tx).all()
+    info = {}
     for tx in Txs:
-        assert tx.amount == Decimal('38.2'),'TestWork amount(%f) err.height:%d' % (tx.amount,tx.height)
-        assert height == tx.height,'TestWork height(%d) err.' % tx.height
-        height = height + 1
-    session.close()
+        if tx.type == 'work':
+           info[tx.height] = {
+               "work": tx.amount, 
+               "txfee" : []}
+        else:
+            info[tx.height]["txfee"].append(tx.txfee)
+    for key in info:
+        assert info[key]["work"] == sum(info[key]["txfee"]) + + Decimal("38.2"),"pow amount err"
     print("TestWork OK")
 
 def TestAmount():
@@ -82,5 +86,5 @@ def TestAmount():
     print("TestAmount OK")
 
 if __name__ == '__main__':
-    #TestWork()
+    TestWork()
     TestAmount()
