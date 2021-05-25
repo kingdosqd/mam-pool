@@ -41,19 +41,29 @@ cmd = "minemon-cli addnewtemplate mintredeem '{\"owner\": \"1j6x8vdkkbnxe8qwjggf
 run_cmd(cmd)
 # 21g02epzpp8txzbtg44t6stf78djkwt2cz5w61mvsy1t00ddywwks3b68
 
+
+#    "privkey" : "1dc744f645627179af2d938d6d3294fdd447bb96caf861c1db05cd874adffcea",
+#    "pubkey" : "6430b5ac60d61914121bd8db1d00fa10422d0a935f1d3ef9a941f9936e5d7979"
+#    "addr" : "1f5wntvmkz50tky9y3nfs62hd888fm00xvfc1p4gm37b61b5n61j54tet"
+cmd = "minemon-cli addnewtemplate mintpledge '{\"owner\": \"1f5wntvmkz50tky9y3nfs62hd888fm00xvfc1p4gm37b61b5n61j54tet\", \"powmint\": \"20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf\", \"rewardmode\":1}'"
+run_cmd(cmd)
+# 21c06w107f5rr6wj3ezeh8w0bn40pnkrdp7nnvb87py784m6efsgzwxpr
+
 while True:
     time.sleep(3)
     json_str = subprocess.getoutput('minemon-cli getbalance')
     objs = json.loads(json_str)
     is_break = False
     for obj in objs:
-        if obj["address"] == "20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf" and obj["avail"]  >= 100:
+        if obj["address"] == "20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf" and obj["avail"]  > 250:
             is_break = True
             break
 
     # 给挖矿地址投票
     if is_break:
         cmd = "minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf 21c0ccarf3kpr87r2peet1p1ngsmsze8qdsmza6kmws9fz6k0v9y7fmnc 100"
+        run_cmd(cmd)
+        cmd = "minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf 21c06w107f5rr6wj3ezeh8w0bn40pnkrdp7nnvb87py784m6efsgzwxpr 150"
         run_cmd(cmd)
         break
     run_cmd("minemon-cli getforkheight")

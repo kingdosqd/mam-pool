@@ -37,6 +37,8 @@ class Tx(Base):
     sendto = Column(VARCHAR(256), nullable=False)
     amount = Column(DECIMAL, nullable=False)
     txfee = Column(DECIMAL, nullable=False)
+    pool_in = Column(VARCHAR(256), nullable=False)
+    miner_in = Column(VARCHAR(256), nullable=False)
 
 def TestWork():
     DBSession = sessionmaker(bind=engine)
@@ -54,6 +56,7 @@ def TestWork():
         assert info[key]["work"] == sum(info[key]["txfee"]) + + Decimal("38.2"),"pow amount err"
     print("TestWork OK")
 
+
 def TestAmount():
     BBCP_PLEDGE_REWARD_DISTRIBUTE_HEIGHT = 2
     DBSession = sessionmaker(bind=engine)
@@ -63,27 +66,36 @@ def TestAmount():
     M_ = N_ * 100
     TotalReward = Decimal("0")
     MoneySupply = Decimal("0")
-    Vote = Decimal("0")
+    Vote = {}
+    pool_addr = None
     Stakes = []
     for tx in Txs:
         if tx.type == 'work':
             TotalReward = TotalReward + Decimal("100.0")
             MoneySupply = MoneySupply + Decimal("38.2")
+            pool_addr = tx.sendto
         if tx.type == 'stake':
-            Stake = round((TotalReward - MoneySupply) * Vote / M_,6)
+            v = 0
+            if pool_addr in Vote:
+                v = Vote[pool_addr]
+            Stake = round((TotalReward - MoneySupply) * v / M_,6)
             assert tx.amount == Stake,"奖励金额不对.tx.amount:%f, Stake:%f, height:%d" % (tx.amount, Stake,tx.height)
             Stakes.append(Stake)
             MoneySupply = MoneySupply + Stake
         if tx.type == 'distribute':
-            Vote = Vote + tx.amount
             if len(Stakes) == BBCP_PLEDGE_REWARD_DISTRIBUTE_HEIGHT + 1:
                 assert tx.amount == sum(Stakes[:-1]),"系统发的奖励错误"
             Stakes = Stakes[-1:]
-        if tx.sendto[0:4] == "21c0" and tx.type != "distribute":
-            assert tx.amount >= Decimal("100"),"投票金额小于100（%f" % tx.amount
-            Vote = Vote + tx.amount
+        if tx.sendto[0:4] == "21c0":
+            if tx.pool_in in Vote:
+                Vote[tx.pool_in] += tx.amount
+            else:
+                Vote[tx.pool_in] = tx.amount
+            if tx.type != 'distribute':
+                assert tx.amount >= Decimal("100"),"投票金额小于100（%f" % tx.amount
     session.close()
     print("TestAmount OK")
+
 
 if __name__ == '__main__':
     TestWork()
