@@ -21,7 +21,7 @@ run_cmd('minemon-cli stop')
 run_cmd('rm -rf ~/.minemon/*')
 run_cmd('cp ./minemon.conf ~/.minemon/')
 #subprocess.run(['minemon', '-daemon'])
-subprocess.run('minemon -daemon',shell=True)
+subprocess.run('minemon -daemon -debug',shell=True)
 time.sleep(2)
 run_cmd('minemon-cli importprivkey 42b889a2668eda6d78682c23b5651fb76b5aac2b71caba1aa23b6b14d5ce75b7 123')
 run_cmd('minemon-cli unlockkey 57e7d8bb1119ec37d76f0785e73b1a3fa288a5aa1e84925fe47a5d73b68dba91 123 0')
@@ -55,7 +55,7 @@ while True:
     objs = json.loads(json_str)
     is_break = False
     for obj in objs:
-        if obj["address"] == "20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf" and obj["avail"]  > 250:
+        if obj["address"] == "20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf" and obj["avail"]  > 100:
             is_break = True
             break
 
@@ -63,11 +63,27 @@ while True:
     if is_break:
         cmd = "minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf 21c0ccarf3kpr87r2peet1p1ngsmsze8qdsmza6kmws9fz6k0v9y7fmnc 100"
         run_cmd(cmd)
-        cmd = "minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf 21c06w107f5rr6wj3ezeh8w0bn40pnkrdp7nnvb87py784m6efsgzwxpr 150"
+        break
+    run_cmd("minemon-cli getforkheight")
+
+
+while True:
+    time.sleep(3)
+    json_str = subprocess.getoutput('minemon-cli getbalance')
+    objs = json.loads(json_str)
+    is_break = False
+    for obj in objs:
+        if obj["address"] == "20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf" and obj["avail"]  > 300:
+            is_break = True
+            break
+
+    # 给挖矿地址投票
+    if is_break:
+        cmd = "minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf 21c06w107f5rr6wj3ezeh8w0bn40pnkrdp7nnvb87py784m6efsgzwxpr 200"
         run_cmd(cmd)
         break
     run_cmd("minemon-cli getforkheight")
-            
+
 while True:
     run_cmd('minemon-cli getbalance')
     run_cmd("minemon-cli getforkheight")

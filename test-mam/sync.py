@@ -67,4 +67,5 @@ def Run():
     connection.commit()
 
 if __name__ == '__main__':
+    ExecSql("delete from tx;")
     Run()
