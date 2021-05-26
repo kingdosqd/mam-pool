@@ -17,20 +17,22 @@ def ExecSql(sql):
         connection.commit()
         return cursor.lastrowid
     except Exception as e:
+        print(e,sql)
         return 0
 
 
-def get_tx_data(txid,height):
+def get_tx_data(txid,height,bits):
     cmd = 'minemon-cli gettransaction %s' % txid
     info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
     objs = json.loads(info.stdout)
     tx = objs["transaction"]
     pool_in = ""
     miner_in = ""
-    if tx["sendto"][:4] == "21c0" and tx["type"] != 'distribute':
+    if tx["sendto"][:4] == "21c0" and tx["type"] == 'token':
         miner_in = bbc_lib.Hex2Addr(tx["sig"][:66])
         pool_in = bbc_lib.Hex2Addr(tx["sig"][66:66+66])
-    sql = "insert tx(txid,height,type,sendfrom,sendto,amount,txfee,pool_in,miner_in)values('%s',%d,'%s','%s','%s',%f,%f,'%s','%s')" % (tx["txid"],height,tx["type"],tx["sendfrom"],tx["sendto"],tx["amount"],tx["txfee"],pool_in,miner_in)
+    sql = "insert tx(txid,height,type,sendfrom,sendto,amount,txfee,bits,pool_in,miner_in)values('%s',%d,'%s','%s','%s',%f,%f,'%s','%s','%s')" \
+        % (tx["txid"],height,tx["type"],tx["sendfrom"],tx["sendto"],tx["amount"],tx["txfee"],bits,pool_in,miner_in)
     #print(sql)
     ExecSql(sql)
 
@@ -43,15 +45,15 @@ def get_block_data(height):
     cmd = 'minemon-cli getblock %s' % objs[0]
     info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
     objs = json.loads(info.stdout)
-    get_tx_data(objs["txmint"],height)
+    get_tx_data(objs["txmint"],height,objs["bits"])
     for txid in objs["tx"]:
-        get_tx_data(txid,height)
+        get_tx_data(txid,height,objs["bits"])
 
 def Run():
     cmd = 'minemon-cli getforkheight'
     info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
     height = int(info.stdout)
-    for h in range(1,height):
+    for h in range(1,height+1):
         #print(h)
         get_block_data(h)
 

@@ -17,6 +17,10 @@ def run_cmd(cmd):
     print(info.stdout)
     time.sleep(1)
 
+for i in range(30):
+    print(i)
+        
+
 run_cmd('minemon-cli stop')
 run_cmd('rm -rf ~/.minemon/*')
 run_cmd('cp ./minemon.conf ~/.minemon/')
@@ -49,40 +53,36 @@ cmd = "minemon-cli addnewtemplate mintpledge '{\"owner\": \"1f5wntvmkz50tky9y3nf
 run_cmd(cmd)
 # 21c06w107f5rr6wj3ezeh8w0bn40pnkrdp7nnvb87py784m6efsgzwxpr
 
-while True:
-    time.sleep(3)
-    json_str = subprocess.getoutput('minemon-cli getbalance')
-    objs = json.loads(json_str)
-    is_break = False
-    for obj in objs:
-        if obj["address"] == "20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf" and obj["avail"]  > 100:
-            is_break = True
+def Vote():
+    cmd = "minemon-cli makekeypair"
+    info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
+
+    cmd = "minemon-cli getpubkeyaddress " + json.loads(info.stdout)["pubkey"]
+    info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
+    cmd = "minemon-cli addnewtemplate mintpledge '{\"owner\": \"%s\", \"powmint\": \"20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf\", \"rewardmode\":1}'" % info.stdout.strip('\n')
+    info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
+    cmd = "minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf %s 100" % info.stdout.strip('\n')        
+    info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
+    print(info.stdout)
+
+for i in range(30):
+    while True:
+        time.sleep(3)
+        json_str = subprocess.getoutput('minemon-cli getbalance')
+        objs = json.loads(json_str)
+        is_break = False
+        for obj in objs:
+            if obj["address"] == "20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf" and obj["avail"]  > 100:
+                is_break = True
+                break
+
+        # 给挖矿地址投票
+        if is_break:
+            Vote()
+            #cmd = "minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf 21c0ccarf3kpr87r2peet1p1ngsmsze8qdsmza6kmws9fz6k0v9y7fmnc 100"
+            #run_cmd(cmd)
+            #for i in range(30):
+            #    Vote()
             break
+        run_cmd("minemon-cli getforkheight")
 
-    # 给挖矿地址投票
-    if is_break:
-        cmd = "minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf 21c0ccarf3kpr87r2peet1p1ngsmsze8qdsmza6kmws9fz6k0v9y7fmnc 100"
-        run_cmd(cmd)
-        break
-    run_cmd("minemon-cli getforkheight")
-
-while True:
-    time.sleep(3)
-    json_str = subprocess.getoutput('minemon-cli getbalance')
-    objs = json.loads(json_str)
-    is_break = False
-    for obj in objs:
-        if obj["address"] == "20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf" and obj["avail"]  > 300:
-            is_break = True
-            break
-
-    # 给挖矿地址投票
-    if is_break:
-        cmd = "minemon-cli sendfrom 20g053vhn4ygv9m8pzhevnjvtgbbqhgs66qv31ez39v9xbxvk0ynqmeyf 21c06w107f5rr6wj3ezeh8w0bn40pnkrdp7nnvb87py784m6efsgzwxpr 200"
-        run_cmd(cmd)
-        break
-    run_cmd("minemon-cli getforkheight")
-
-while True:
-    run_cmd('minemon-cli getbalance')
-    run_cmd("minemon-cli getforkheight")
