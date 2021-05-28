@@ -16,7 +16,7 @@ var http = require('http');
 });*/
 
 var pool = module.exports = function pool(options, authorizeFn){
-
+    
     this.options = options;
 
     var _this = this;
@@ -28,7 +28,7 @@ var pool = module.exports = function pool(options, authorizeFn){
     var emitErrorLog   = function(text) { _this.emit('log', 'error'  , text); };
     var emitSpecialLog = function(text) { _this.emit('log', 'special', text); };
 
-
+    mint_addr_index = 0
 
     if (!(options.coin.algorithm in algos)){
         emitErrorLog('The ' + options.coin.algorithm + ' hashing algorithm is not supported.');
@@ -238,7 +238,7 @@ var pool = module.exports = function pool(options, authorizeFn){
                 callback();
             });
         });
-
+        
         var requestJson = JSON.stringify({
             method: 'submitwork',
             params: {
@@ -249,8 +249,8 @@ var pool = module.exports = function pool(options, authorizeFn){
                 merkle_branch_aux : shareData.merkle_branch_aux,
                 merkle_branch : shareData.merkle_branch,
                 mam_data : shareData.mam_data,
-                spent : _this.daemon.instances[0].mam.spent,
-                privkey : _this.daemon.instances[0].mam.privkey
+                spent : _this.daemon.instances[0].mam.mint_addr[shareData.mint_addr_index].spent,
+                pledgefee : _this.daemon.instances[0].mam.mint_addr[shareData.mint_addr_index].pledgefee
             },
             id: Date.now() + Math.floor(Math.random() * 10)
         });
@@ -648,13 +648,15 @@ var pool = module.exports = function pool(options, authorizeFn){
                     var requestJson = JSON.stringify({
                     method: 'getwork',
                     params: {
-                        spent : _this.daemon.instances[0].mam.spent,
-                        privkey : _this.daemon.instances[0].mam.privkey
+                        spent : _this.daemon.instances[0].mam.mint_addr[mint_addr_index].spent,
+                        pledgefee : _this.daemon.instances[0].mam.mint_addr[mint_addr_index].pledgefee
                     },
                     id: Date.now() + Math.floor(Math.random() * 10)});
                     
                     mam_performHttpRequest(requestJson,function(res) {
+                        res.work.mint_addr_index = mint_addr_index
                         result.response.mam = res.work;
+                        mint_addr_index = res.work.prevblockheight % _this.daemon.instances[0].mam.mint_addr.length
                         var processedNewBlock = _this.jobManager.processTemplate(result.response);
                         callback(null, result.response, processedNewBlock);
                         callback = function(){};
