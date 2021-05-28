@@ -75,6 +75,11 @@ def SetVote(Vote,tx):
                     "vote":tx.amount,
                     "stake":0,
                     "stake_":0
+                },
+                tx.pool_in: {
+                    "vote":0,
+                    "stake":0,
+                    "stake_":0
                 }
             }
         }
@@ -85,11 +90,19 @@ def SetVoteStake(Vote,pool_in,stake,height):
     vote_sum = Decimal("0")
     for miner in Vote[pool_in]["info"]:
         vote_sum += Vote[pool_in]["info"][miner]["vote"]
-
+    print(height,stake)
+    newv1sum = Decimal("0")
     for miner in Vote[pool_in]["info"]:
         v = Vote[pool_in]["info"][miner]["vote"]
-        Vote[pool_in]["info"][miner]["stake"] += stake * v / vote_sum
-        Vote[pool_in]["info"][miner]["stake_"] = stake * v / vote_sum
+        stake_ = stake * Decimal("0.95")
+        newv1 = stake_ * v / vote_sum
+        newv1sum += newv1
+        Vote[pool_in]["info"][miner]["stake"] += newv1
+        Vote[pool_in]["info"][miner]["stake_"] = newv1
+
+    Vote[pool_in]["info"][pool_in]["stake"] += (stake - newv1sum)
+    Vote[pool_in]["info"][pool_in]["stake_"] = (stake - newv1sum)
+    
 
 def DelVoteStake(Vote,pool_addr):
     for pool_in in Vote:
@@ -113,14 +126,13 @@ def CheckVoteStake(Vote,tx,pool_addr):
                 b = Decimal("0")
                 if tx.pool_in == pool_addr:
                     b = Vote[pool_in]["info"][miner]["stake_"]
-                #context.rounding = decimal.ROUND_HALF_UP
                 c = round(a - b,6)
                 stake = round(stake,6)
-                assert stake == c,"err"
-                #if abs(stake - c) > Decimal("0.000050"):
-                #    print("err",stake ,c)
-                #    exit()
-                #print(abs(round(stake - c,6)))
+                #assert stake == c,"err"
+                if abs(stake - c) > Decimal("0.000050"):
+                    print("err",stake ,c)
+                    exit()
+                print(abs(round(stake - c,6)))
     
 
 def TestAmount():
@@ -183,33 +195,5 @@ def TestAmount():
     print("TestAmount OK")
 
 if __name__ == '__main__':
-    context.rounding = decimal.ROUND_HALF_UP
-    # 11 20.394000
-    # 12 21.636180
-    # 13 22.841094
-    # 14 24.009861
-    # 15 25.143565
-
-    # 76.0164670000
-    # 38.0082330000
-    d16_1 = Decimal("76.0164670000")
-    d16_2 = Decimal("38.0082330000")
-
-    d11 = Decimal("20.394000")
-    d12 = Decimal("21.636180")
-    d13 = Decimal("22.841094")
-    d14 = Decimal("24.009861")
-    d15 = Decimal("25.143565")
-    d = d11 + d12 + d13 + d14 + d15
-    #d = int(d * 1000000)
-    n1 = round(d * 2 / 3,6)
-    print(n1)
-    n2 = round(d / 3,6)
-    print(n2)
-    #d_1 = d * 2 / 3
-    #d_2 = d / 3
-    #print(d)
-    #print(d16_1 + d16_2)
-    #print(d_1 + d_2)
     #TestWork()
     TestAmount()
