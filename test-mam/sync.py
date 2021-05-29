@@ -31,6 +31,7 @@ def get_tx_data(txid,height,bits):
     if tx["sendto"][:4] == "21c0" and tx["type"] == 'token':
         miner_in = bbc_lib.Hex2Addr(tx["sig"][:66])
         pool_in = bbc_lib.Hex2Addr(tx["sig"][66:66+66])
+    
     sql = "insert tx(txid,height,type,sendfrom,sendto,amount,txfee,bits,pool_in,miner_in)values('%s',%d,'%s','%s','%s',%f,%f,'%s','%s','%s')" \
         % (tx["txid"],height,tx["type"],tx["sendfrom"],tx["sendto"],tx["amount"],tx["txfee"],bits,pool_in,miner_in)
     #print(sql)

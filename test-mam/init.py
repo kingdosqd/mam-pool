@@ -14,6 +14,7 @@ if len(sys.argv) > 1:
     privkey = "d76a62a1513a6f0f7a196536bc3916f6480c092ff458b09a0473eebae7c88f61"
     pubkey = "d51e71c180bf2731413a0bb737cb0a73eca7d08687047fe7d5cab042b0e28f6d"
     addr = "1dp7y5c22p35dbsvz0j3rdm57xhsgnjsqpw5kmg9h4yzr1gbh3vamb18j"
+    print("另外一台机器")
 
 def run_cmd(cmd):
     print(cmd)
@@ -26,6 +27,13 @@ run_cmd('rm -rf ~/.minemon/*')
 
 cmd = '''echo spentaddress=%s '
 pledgefee=50
+listen4' >> ~/.minemon/minemon.conf
+''' % addr
+
+if len(sys.argv) > 1:
+    cmd = '''echo spentaddress=%s '
+pledgefee=50
+connect=192.168.0.103
 listen4' >> ~/.minemon/minemon.conf
 ''' % addr
 
@@ -67,14 +75,51 @@ while True:
     objs = json.loads(json_str)
     is_break = False
     for obj in objs:
-        if obj["address"] == miner_addr and obj["avail"]  > 300:
+        if obj["address"] == miner_addr and obj["avail"]  > 100:
             is_break = True
             break
 
     # 给挖矿地址投票
     if is_break:
         Vote(miner_addr,"16rqwvjcr6r458va8cfwyyc5gqh2vj0p6b1b1zan1ga1zg5vqpy3v15m1")
+        #Vote(miner_addr,"17nhq5fn5v60x05n6p446ne39rt2g2me0ffez12926st4d3kxr8mbfape")
+        #Vote(miner_addr,"1h9pd97xa2xm1w5nj2m7baft082xdy75ccj624g6v5rgc7xbnmf3c6t45")
+        break
+    run_cmd("minemon-cli getforkheight")
+
+
+while True:
+    time.sleep(3)
+    json_str = subprocess.getoutput('minemon-cli getbalance')
+    objs = json.loads(json_str)
+    is_break = False
+    for obj in objs:
+        if obj["address"] == miner_addr and obj["avail"]  > 100:
+            is_break = True
+            break
+
+    # 给挖矿地址投票
+    if is_break:
+        #Vote(miner_addr,"16rqwvjcr6r458va8cfwyyc5gqh2vj0p6b1b1zan1ga1zg5vqpy3v15m1")
         Vote(miner_addr,"17nhq5fn5v60x05n6p446ne39rt2g2me0ffez12926st4d3kxr8mbfape")
+        #Vote(miner_addr,"1h9pd97xa2xm1w5nj2m7baft082xdy75ccj624g6v5rgc7xbnmf3c6t45")
+        break
+    run_cmd("minemon-cli getforkheight")
+
+while True:
+    time.sleep(3)
+    json_str = subprocess.getoutput('minemon-cli getbalance')
+    objs = json.loads(json_str)
+    is_break = False
+    for obj in objs:
+        if obj["address"] == miner_addr and obj["avail"]  > 100:
+            is_break = True
+            break
+
+    # 给挖矿地址投票
+    if is_break:
+        #Vote(miner_addr,"16rqwvjcr6r458va8cfwyyc5gqh2vj0p6b1b1zan1ga1zg5vqpy3v15m1")
+        #Vote(miner_addr,"17nhq5fn5v60x05n6p446ne39rt2g2me0ffez12926st4d3kxr8mbfape")
         Vote(miner_addr,"1h9pd97xa2xm1w5nj2m7baft082xdy75ccj624g6v5rgc7xbnmf3c6t45")
         break
     run_cmd("minemon-cli getforkheight")

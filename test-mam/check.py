@@ -3,11 +3,6 @@
 
 # python 3.6.9
 # sqlalchemy 1.4.15(sqlalchemy.__version__)
-'''
-检查项:
-1:pow奖励金额的正确性
-2:检查发放奖励，投票金额，资金池金额
-'''
 
 import decimal
 from sqlalchemy.dialects.mysql import INTEGER, VARCHAR,DECIMAL
@@ -19,6 +14,9 @@ from decimal import Decimal,getcontext
 
 from sqlalchemy.sql.expression import null, true
 from operator import add, itemgetter, attrgetter
+
+import re
+import subprocess
 
 context = decimal.getcontext()
 context.rounding = decimal.ROUND_DOWN
@@ -53,7 +51,7 @@ def TestWork():
         else:
             info[tx.height]["txfee"].append(tx.txfee)
     for key in info:
-        assert info[key]["work"] == sum(info[key]["txfee"]) + + Decimal("38.2"),"pow amount err"
+        assert info[key]["work"] == sum(info[key]["txfee"]) + Decimal("38.2"),"pow amount err"
     print("TestWork OK")
 
 def SetVote(Vote,tx):
@@ -64,8 +62,7 @@ def SetVote(Vote,tx):
         else:
             Vote[tx.pool_in]["info"][tx.sendto] = {
                 "vote":tx.amount,
-                "stake":0,
-                "stake_":0
+                "stake":0
             }
     else:
         Vote[tx.pool_in] = {
@@ -73,70 +70,46 @@ def SetVote(Vote,tx):
             "info":{
                 tx.sendto : {
                     "vote":tx.amount,
-                    "stake":0,
-                    "stake_":0
+                    "stake":0
                 },
                 tx.pool_in: {
                     "vote":0,
-                    "stake":0,
-                    "stake_":0
+                    "stake":0
                 }
             }
         }
 
-def SetVoteStake(Vote,pool_in,stake,height):
-    if pool_in not in Vote:
-        return
+def SetStake(Vote,pool_in,stake):
+    assert pool_in != ""
+    assert pool_in in Vote
     vote_sum = Decimal("0")
     for miner in Vote[pool_in]["info"]:
+        assert miner != ""
         vote_sum += Vote[pool_in]["info"][miner]["vote"]
-    print(height,stake)
-    newv1sum = Decimal("0")
+
     for miner in Vote[pool_in]["info"]:
         v = Vote[pool_in]["info"][miner]["vote"]
-        stake_ = stake * Decimal("0.95")
-        newv1 = stake_ * v / vote_sum
-        newv1sum += newv1
-        Vote[pool_in]["info"][miner]["stake"] += newv1
-        Vote[pool_in]["info"][miner]["stake_"] = newv1
+        Vote[pool_in]["info"][miner]["stake"] += stake * Decimal("0.95") * v / vote_sum
 
-    Vote[pool_in]["info"][pool_in]["stake"] += (stake - newv1sum)
-    Vote[pool_in]["info"][pool_in]["stake_"] = (stake - newv1sum)
     
-
-def DelVoteStake(Vote,pool_addr):
+def DelStake(Vote):
     for pool_in in Vote:
+        assert pool_in != ""
         for miner in Vote[pool_in]["info"]:
-            Vote[pool_in]["info"][miner]["stake"] = Vote[pool_in]["info"][miner]["stake_"]
-            Vote[pool_in]["info"][miner]["stake_"] = 0
-    
-    for pool_in in Vote:
-        if pool_in != pool_addr:
-            for miner in Vote[pool_in]["info"]:
-                Vote[pool_in]["info"][miner]["stake"] = Decimal("0")
-                Vote[pool_in]["info"][miner]["stake_"] = Decimal("0")
-    
+            assert miner != ""
+            Vote[pool_in]["info"][miner]["stake"] = Decimal("0")
 
-def CheckVoteStake(Vote,tx,pool_addr):
-    stake = tx.amount
+
+def CheckStake(Vote,tx):
     for pool_in in Vote:
         for miner in Vote[pool_in]["info"]:
             if miner == tx.sendto:
-                a = Vote[pool_in]["info"][miner]["stake"]
-                b = Decimal("0")
-                if tx.pool_in == pool_addr:
-                    b = Vote[pool_in]["info"][miner]["stake_"]
-                c = round(a - b,6)
-                stake = round(stake,6)
-                #assert stake == c,"err"
-                if abs(stake - c) > Decimal("0.000050"):
-                    print("err",stake ,c)
-                    exit()
-                print(abs(round(stake - c,6)))
-    
+                s1 = Vote[pool_in]["info"][miner]["stake"]
+                s2 = tx.amount
+                assert abs(s1 - s2) < Decimal("0.000008")    
+                
 
 def TestAmount():
-    BBCP_PLEDGE_REWARD_DISTRIBUTE_HEIGHT = 5
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     Txs = session.query(Tx).all()
@@ -161,39 +134,67 @@ def TestAmount():
     MoneySupply = Decimal("0")
     Stakes = []
     for height in info:
-        TotalReward = TotalReward + Decimal("100.0")
-        MoneySupply = MoneySupply + Decimal("38.2")
         Stake = Decimal("0")
-        if info[height]["work"].sendto in Vote:
-            if Vote[info[height]["work"].sendto]["v"] > M_:
-                Stake = round((TotalReward - MoneySupply),6)
+        pool_addr = info[height]["work"].sendto
+        if pool_addr in Vote:
+            if Vote[pool_addr]["v"] > M_:
+                Stake = round((TotalReward - MoneySupply + Decimal("61.8")),6)
             else:
-                Stake = round((TotalReward - MoneySupply) * Vote[info[height]["work"].sendto]["v"] / M_,6)
-        # 让抵押者分掉收益
-        SetVoteStake(Vote,info[height]["work"].sendto,Stake,height)
-        #print(height,Stake)
-        Stakes.append(Stake)
-        MoneySupply += Stake
-        
-        if height % BBCP_PLEDGE_REWARD_DISTRIBUTE_HEIGHT == 1:
-            sum_ = Decimal("0")
+                Stake = round((TotalReward - MoneySupply + Decimal("61.8")) * Vote[pool_addr]["v"] / M_,6)
+
+        ####  开始验证 
+        cmd = "cat ~/.minemon/logs/* ~/.minemon/logs-collector/* 2>/dev/null | grep 'CalcPledgeRewardValue: height: %s,' | head -n 1" % (height)
+        res = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
+        searchObj = re.search(r'nTotalReward: (.*), nMoneySupply: (.*), Surplus: .* = (.*), Pledge: .* = (.*), Reward: .* = (.*)', res.stdout, re.M|re.I)
+        if searchObj:
+            #print(height,searchObj.group())
+            searchObj = {
+                "TotalReward":Decimal(searchObj.group(1)),
+                "MoneySupply":Decimal(searchObj.group(2)),
+                "Surplus":Decimal(searchObj.group(3)),
+                "Pledge":Decimal(searchObj.group(4)),
+                "Reward":Decimal(searchObj.group(5))
+            }
+            assert TotalReward == searchObj["TotalReward"],(height,TotalReward,searchObj["TotalReward"])
+            assert MoneySupply == searchObj["MoneySupply"],(height,MoneySupply,searchObj["MoneySupply"])
+            #assert Stake == searchObj["Reward"],(height,Stake,searchObj["Reward"])
+            #print("height:",height,"test OK.")
+
+        if len(info[height]["stake"]) > 0:
+            sum_stake = Decimal("0")
             for tx in info[height]["stake"]:
-                sum_ += tx.amount
-                #更新投票
-                SetVote(Vote,tx)
-                #检查发放是否正确
-                CheckVoteStake(Vote,tx,info[height]["work"].sendto)
-            sum2_ = sum(Stakes[:-1])
-            assert sum_ == sum2_,"奖励发放总金额错误"
-            Stakes = Stakes[-1:]
-            DelVoteStake(Vote,info[height]["work"].sendto)
-        for tx in info[height]["vote"]:
-            #更新投票
+                sum_stake += tx.amount
+                if tx.sendto[:4] != "20g0":
+                    CheckStake(Vote,tx)
+            assert sum_stake == sum(Stakes),(height,sum_stake,sum(Stakes))
+            print("height:",height,"stake OK.")
+            #### 结束验证
+
+            ## 清空数据
+            Stakes = []
+            DelStake(Vote)
+
+        #### 更新数据
+        Stakes.append(Stake)
+        TotalReward += Decimal("100.0")
+        MoneySupply += Decimal("38.2") + Stake
+        
+        # 把奖励金额给分掉
+        if Stake > Decimal("0"):
+            SetStake(Vote,pool_addr,Stake)
+        # 更新投票
+        ## 转账的投票
+        for tx in info[height]["vote"]:   
             SetVote(Vote,tx)
+        ## 奖励的投票
+        for tx in info[height]["stake"]:
+            # 给矿池发放的奖励不是投票
+            if tx.pool_in != "":
+                SetVote(Vote,tx)
 
     session.close()
     print("TestAmount OK")
-
+        
 if __name__ == '__main__':
-    #TestWork()
+    TestWork()
     TestAmount()
