@@ -51,8 +51,6 @@
             {
                 "host": "127.0.0.1",
                 "port": 7702,
-                "spent":"187ssr7erv8dq1eb1gb4mqxe30s89mb8bmmvr0jgj4e3x1sy4kzm27jpv",
-                "pledgefee":50,
                 "mint_addr":[
                     {
                         "spent":"187ssr7erv8dq1eb1gb4mqxe30s89mb8bmmvr0jgj4e3x1sy4kzm27jpv",

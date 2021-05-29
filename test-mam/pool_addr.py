@@ -5,7 +5,10 @@ import subprocess
 import json
 import time
 
-def Vote(pledgefee):
+# "spent":"187ssr7erv8dq1eb1gb4mqxe30s89mb8bmmvr0jgj4e3x1sy4kzm27jpv",
+#                       "pledgefee":49,
+# 
+def Vote(pledgefee,mint_addr_index):
     cmd = "minemon-cli makekeypair"
     info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
     obj = json.loads(info.stdout)
@@ -13,21 +16,22 @@ def Vote(pledgefee):
     info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
     obj["spent"] = info.stdout.strip("\n")
     obj["pledgefee"] = pledgefee
-    cmd = "minemon-cli addnewtemplate mint '{\"pledgefee\": %d, \"spent\": \"%s\"}'" % (pledgefee * 1000,obj["spent"])
+    cmd = "minemon-cli addnewtemplate mint '{\"pledgefee\": %d, \"spent\": \"%s\"}'" % (pledgefee,obj["spent"])
     info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
-    obj["pow_addr"] = info.stdout.strip("\n")
+    obj["pool_addr"] = info.stdout.strip("\n")
+    obj["mint_addr_index"] = mint_addr_index
     return obj
 
-data = {}
+data = []
 for i in range(100):
-   data[i] = Vote(0.95)
+   data.append(Vote(50,i))
 
 file_data = json.dumps(data,indent=4,ensure_ascii=False)
 with open('./privkey.json','w') as f:
     f.write(file_data)
 
 for key in data:
-    del data[key]["privkey"]
+    del key["privkey"]
 
 file_data = json.dumps(data,indent=4,ensure_ascii=False)
 with open('./pubkey.json','w') as f:
