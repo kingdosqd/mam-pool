@@ -57,7 +57,7 @@ def Run():
     for h in range(1,height+1):
         #print(h)
         get_block_data(h)
-
+        
     ### 更新数据
     sql = "select sendto,pool_in,miner_in from tx where type = 'token'"
     cursor = connection.cursor()

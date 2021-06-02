@@ -40,7 +40,7 @@ listen4' >> ~/.minemon/minemon.conf
 run_cmd(cmd)
 
 subprocess.run('minemon -daemon',shell=True)
-time.sleep(2)
+time.sleep(5)
 cmd = 'minemon-cli importprivkey %s 123' % privkey
 run_cmd(cmd)
 cmd = 'minemon-cli unlockkey %s 123 0' % pubkey

@@ -32,7 +32,8 @@ with open('./privkey.json','w') as f:
 
 for key in data:
     del key["privkey"]
+    del key["pubkey"]
 
 file_data = json.dumps(data,indent=4,ensure_ascii=False)
-with open('./pubkey.json','w') as f:
+with open('./addr.json','w') as f:
     f.write(file_data)
