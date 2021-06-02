@@ -1,6 +1,7 @@
 test-mam/bbc_lib/
 test-mam/_bbc_lib.cpython-36m-x86_64-linux-gnu.so
-test-mam/__pycache__/bbc_lib.cpython-36.pyc
 test-mam/privkey.json
 test-mam/pubkey.json
 test-mam/addr.json
+test-mam/log_task.log
+test-mam/__pycache__/

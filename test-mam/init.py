@@ -51,6 +51,12 @@ cmd = "minemon-cli addnewtemplate mint '{\"spent\": \"%s\", \"pledgefee\":50}'" 
 info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
 miner_addr = info.stdout.strip("\n")
 
+cmd = "minemon-cli addnewtemplate mintpledge '{\"owner\": \"%s\", \"powmint\": \"%s\", \"rewardmode\":1}'" % (addr,miner_addr)
+info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)
+vote_addr1 = info.stdout.strip("\n")
+print(vote_addr1,"-->>",miner_addr)
+
+exit()
 # 添加投票模板
 #cmd = "minemon-cli addnewtemplate mintpledge '{\"owner\": \"%s\", \"powmint\": \"%s\", \"rewardmode\":1}'" % (privkey,miner_addr)
 #info = subprocess.run(cmd, shell=True,stdout=subprocess.PIPE,universal_newlines=True)

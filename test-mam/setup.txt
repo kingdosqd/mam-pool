@@ -22,6 +22,7 @@ rpcpassword=testpass
 
 # mysql 
 mysql 5.7 安装后密码是什么怎么登陆？
+sudo apt install mysql-server
 #skip-grant-tables
 # 修改密码
 # 认证权限
