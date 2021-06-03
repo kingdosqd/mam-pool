@@ -107,7 +107,7 @@ def InsertTx(block_id,tx,cursor):
 
 def RollBACK(block_hash):
     with connection.cursor() as cursor:
-        sql = "update Block set is_useful = 0 where `hash` = '%s'" % block_hash
+        sql = "update block set is_useful = 0 where `hash` = '%s'" % block_hash
         cursor.execute(sql)
         sql = "SELECT txid from Tx where block_hash = '%s' ORDER BY id desc" % block_hash
         cursor.execute(sql)
