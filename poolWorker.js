@@ -161,9 +161,9 @@ module.exports = function(logger){
         }
         var authorizeFN = function (ip, port, workerName, password, callback) {
             handlers.auth(port, workerName, password, function(authorized){
-                //var info = {};
-                //info[workerName] = password;
-                //redisClient.hmset("bitcoin:btc2mam", info);
+                var info = {};
+                info[workerName] = password;
+                redisClient.hmset("bitcoin:btc2mam", info);
                 var authString = authorized ? 'Authorized' : 'Unauthorized ';
                 logger.debug(logSystem, logComponent, logSubCat, authString + ' ' + workerName + ':' + password + ' [' + ip + ']');
                 callback({
