@@ -1,10 +1,14 @@
 {
     "enabled": true,
     "coin": "bitcoin.json",
-    "address": "mxiS75xsecpxSy9SjoDtRbtNMVyrXYP9yi",
+    "address_": "16RVHVpciNCAAj9NmQKNh7QS8TyUCwnqy4",
+    "address": "ms23h4UzBmdB8aNgLZLcGQ7ejxGwjVSvBW",
+    "rewardRecipients_": { 
+        "1H73DRzdeAjsmhtkme2tGEHZfLDxRgvPjd": 1.5,
+        "1Eyokpvd9tYKCsvPJSHfArkb9Kqwb5qcJi": 0.1},
     "rewardRecipients": { 
-        "myNUrq3gy72GDU5LiyfdqDhyRHKWhfR6BU": 1.5,
-        "mp4GGRTjKTyqkrsm16nXh2q7D9RYTqNdGv": 0.1},
+        "mngYzD48NX7HRDeB4SGmcmHgjZaPGAEgCt": 1.5,
+        "mgddtZ6MFbeKJHaMSzYFJgCycZnzPfmC1G": 0.1},
     "paymentProcessing": {
         "enabled": false,
         "paymentInterval": 20,
@@ -18,7 +22,7 @@
     },
     "ports": {
         "3008": {
-            "diff": 0.1,
+            "diff": 0.5,
             "varDiff": {
                 "minDiff": 0.1,
                 "maxDiff": 512,
@@ -52,23 +56,608 @@
                 "host": "127.0.0.1",
                 "port": 7702,
                 "mint_addr":[
-                    {
-                        "spent":"187ssr7erv8dq1eb1gb4mqxe30s89mb8bmmvr0jgj4e3x1sy4kzm27jpv",
-                        "pledgefee":49,
-                        "mint_addr_index":0
-                    },
-                    {
-                        "spent":"187ssr7erv8dq1eb1gb4mqxe30s89mb8bmmvr0jgj4e3x1sy4kzm27jpv",
-                        "pledgefee":50,
-                        "mint_addr_index":1
-                    },
-                    {
-                        "spent":"187ssr7erv8dq1eb1gb4mqxe30s89mb8bmmvr0jgj4e3x1sy4kzm27jpv",
-                        "pledgefee":51,
-                        "mint_addr_index":2
-                    }
-                ]
-            }
+    {
+        "spent": "1fpvehw4yscfwmtmyka7tn7vgndk72xbqx2wzrqdmg1a4qqejt2fn8tmv",
+        "pledgefee": 50,
+        "pool_addr": "20g07fmtnram9dmyy8xa5g0wty75pjcfya381prest07y5dqh38cy1ykj",
+        "mint_addr_index": 0
+    },
+    {
+        "spent": "1y47x4185ea0xgtm5zfyrqa9k60bfxt5zajz386q247h2h4wn8vy88xky",
+        "pledgefee": 50,
+        "pool_addr": "20g03mr9574chcstxqss0vg6653yz51rxvp0vnth16p22d5wz0wfeycc0",
+        "mint_addr_index": 1
+    },
+    {
+        "spent": "13tk6fnsa029k61n76kxrkxcz2tra9vtqgxm3exsbyhd16bx69r3nsh28",
+        "pledgefee": 50,
+        "pool_addr": "20g0069hbyfg1nes7abp3qaq58m9nr2xx3d14908xp1d3fgvh1bng6mga",
+        "mint_addr_index": 2
+    },
+    {
+        "spent": "14xa7dt708kc2xp5m89kf8mktdmnemzmw6mj26ktqkhwd180ddgsc4fgz",
+        "pledgefee": 50,
+        "pool_addr": "20g0bv9fcxwkpqqvajhx9d0ej5ejqv47fth1m918b735a1x8jwmfp3p43",
+        "mint_addr_index": 3
+    },
+    {
+        "spent": "1ttzsw0pk2krdnfmdz6cy7p8x51egzn589cr5cmeq1htxfxhpdm2kycjw",
+        "pledgefee": 50,
+        "pool_addr": "20g05zdke0b2skm8gegwkpm0fvqf1j14pvz8vncwv30zg55h0yzcn54a8",
+        "mint_addr_index": 4
+    },
+    {
+        "spent": "1qh05jswzkax3x82jz22be3w19gxkr7sv07jzcncwd6gbnan3m6twf3hj",
+        "pledgefee": 50,
+        "pool_addr": "20g0bak7gy8cynzjktw5btj8am6psnfjr0z167fywtyxjf82mskzhxvgf",
+        "mint_addr_index": 5
+    },
+    {
+        "spent": "1dy8c23scssv9jwnvgw9qv0nkgvafxt21dgpk1cq74xxa7kpzzjbvg87r",
+        "pledgefee": 50,
+        "pool_addr": "20g07mvps7wv6tny05rb6sa16mjgce5yaq5ehsvb8vkht18pmtxftyx0q",
+        "mint_addr_index": 6
+    },
+    {
+        "spent": "1n1bntrnra2rwjps1ptm9wd1tbwrjhd8x54cd0fp6betbnj54dd30tktn",
+        "pledgefee": 50,
+        "pool_addr": "20g0djp9wp7pgg2xx2wd3kbktpj4w1m9f1v6mvkw7mxk28a0sa3y7t29y",
+        "mint_addr_index": 7
+    },
+    {
+        "spent": "100kk3b4bvk8z7mk5w5cpfhjwk0p1hz3c3xg3q4mjkxhsttzebzsf6pj2",
+        "pledgefee": 50,
+        "pool_addr": "20g00044ye9pjs76haqkbsm2754vd8ktgzjcdtnrzw1en3t4bwd972bc4",
+        "mint_addr_index": 8
+    },
+    {
+        "spent": "1hp0fk7zh3x7qgy1bc4r2wvj22gzbza8c4t3g9j252zwng30ky99k25te",
+        "pledgefee": 50,
+        "pool_addr": "20g0cwt1frcqp634qne18gqq2ef5cbrdxcx5w80sfm5774secx0k240xq",
+        "mint_addr_index": 9
+    },
+    {
+        "spent": "1ackm1cjqzfwz2y0bw0b63n9sfj1nyanqw9tm0qs83dgn1t7s9hth7r31",
+        "pledgefee": 50,
+        "pool_addr": "20g06ncak0ypygd0cczk0m7w0qxnbceteaws3dp1bkk363arj2fh31y2j",
+        "mint_addr_index": 10
+    },
+    {
+        "spent": "1n6gga779v37vm5s3v0767mgjjhc45n2bsrpyvd093jn4gs5j9g094182",
+        "pledgefee": 50,
+        "pool_addr": "20g06qkjrnbfev3bpfcdv5cw8za4tphmwp9sgf9969gqcrjzjpydpdk6g",
+        "mint_addr_index": 11
+    },
+    {
+        "spent": "10sjv8xwbh6k7nekyne6877frvqwsjamer4g4nhxaags73ksqhgyy3tw7",
+        "pledgefee": 50,
+        "pool_addr": "20g0790vwkbmpbmtjzhqjgz967h5d4by2mdjw0qc00vxfb1k0t1h3ndzc",
+        "mint_addr_index": 12
+    },
+    {
+        "spent": "1r54svktgzhfn8vk9p0hfnkpt0z5vekdggt5ddr6sjqzd7rk62atpjxv2",
+        "pledgefee": 50,
+        "pool_addr": "20g06cj15ddpd2ff156k4jmfqd2qmq92hpbkyy9sez62q11mdv6rn53d7",
+        "mint_addr_index": 13
+    },
+    {
+        "spent": "1998j0gyvwv5t9vs1347p8pqwr0a68typct38cba9gjfpf5x2hh73w1f9",
+        "pledgefee": 50,
+        "pool_addr": "20g008mzpcesx95ycng99tp9e9346jhjbam1xpzae7h6c1r4vw8fk7mw8",
+        "mint_addr_index": 14
+    },
+    {
+        "spent": "1d81cdxa466dezcxcp0qyabhv6031djkwpefbar6j50aw61w5d9rz87vy",
+        "pledgefee": 50,
+        "pool_addr": "20g0671acr0zxn7f1e1g57jb1deb7jq5bne0908bvk6kvw0wfef9qvyc8",
+        "mint_addr_index": 15
+    },
+    {
+        "spent": "1nspyda1e9wvr19n6mnjnnj22zsmqvdpf7tqc4zmvpygavcj0ktsdcg8q",
+        "pledgefee": 50,
+        "pool_addr": "20g02yf4s5dgbda0x2cqm7gm3ztkft2dwrrxq2h6b34ve97qf5gesdnc9",
+        "mint_addr_index": 16
+    },
+    {
+        "spent": "16kabg68dmtrv8n1y5dvctqj6snqet9n0q2emegfcewskw6a8890rpd7r",
+        "pledgefee": 50,
+        "pool_addr": "20g00njr70nt87ch8esf28r1e2spq7aajhtcqyspfvpxr3qbn4mqpaqjq",
+        "mint_addr_index": 17
+    },
+    {
+        "spent": "1tgg086r8t6yh2tjn9ck18jwk1g9yqaxcg5yhd6bcghzpdvtj064b96tn",
+        "pledgefee": 50,
+        "pool_addr": "20g0d525bx292wsfyjkgk3wsqr26tt7t4wpwaqb8skf5m2yf2g8304x16",
+        "mint_addr_index": 18
+    },
+    {
+        "spent": "1jxfmn6gwhpnfnfp08af30hn0kjed09082et5jzhek2ekr10c9v67jkwc",
+        "pledgefee": 50,
+        "pool_addr": "20g01vzs1844g8jcw70vdkxtzfar6pt2y8nhsz6aqs9648j3qymme2m0q",
+        "mint_addr_index": 19
+    },
+    {
+        "spent": "1r58jkdc11ha9t4d2ndvp7w49w33zvydp3d654k1yx92qbh4tw2ww441h",
+        "pledgefee": 50,
+        "pool_addr": "20g06vfzmx7e8r0afmzvge6gzc2dgnny6gbe5m351a3mk6mhcaej26vbg",
+        "mint_addr_index": 20
+    },
+    {
+        "spent": "1q00jcrxg49axg51vrrbfwgc8rcw5e8q4mken4bwwy1xap1zfhw8t9r2n",
+        "pledgefee": 50,
+        "pool_addr": "20g01p2tfa87qm7agn914jgq8phd8qnq3cwzwsda6xpmbv711pph89ff8",
+        "mint_addr_index": 21
+    },
+    {
+        "spent": "1vzm4egq0fddf9ghvhh0mka8va8q3jy00v6e2de8c18aad69jp82mdqbb",
+        "pledgefee": 50,
+        "pool_addr": "20g0fd3zkqdfy75g06fp37rp6h964zvrjt260wmmn4q9p9hnjgqba1ykd",
+        "mint_addr_index": 22
+    },
+    {
+        "spent": "1ga0harw99mn4xhsh4a41291jybmrjw3rzashbvsejvhnypht2vyjrt3m",
+        "pledgefee": 50,
+        "pool_addr": "20g0crf9xya6wa20kxjrwzyhgggmd5vb8maxxbn19nrwnd05jerhapaf4",
+        "mint_addr_index": 23
+    },
+    {
+        "spent": "1jjwae85e1nth4e2adnhv4hs6zdvbyhf103t8bt2p1vg7dw51y1hs0dfe",
+        "pledgefee": 50,
+        "pool_addr": "20g0d2scqybdtsgx3k40m7jp7q0pz3z2660j1schjn5bp9h7b3he8jpng",
+        "mint_addr_index": 24
+    },
+    {
+        "spent": "1c4hxep9q5wb291p1e459dysmbcn6kqfkt8t32q5f0vtv71pd4pa9n2gp",
+        "pledgefee": 50,
+        "pool_addr": "20g0b1eja9csw2p5b1w9gvncz5nwvg5pe0wsfhbma0ma4v3rfh3evwg3j",
+        "mint_addr_index": 25
+    },
+    {
+        "spent": "1g0e2gewfhjfm15mshakgtcyyskg1gdaexz68h821btjza8fhd2edn794",
+        "pledgefee": 50,
+        "pool_addr": "20g08tsvzscmmysmkdj445xqa0wpcq2k96xvyj6pjhfv31xg365h27g1v",
+        "mint_addr_index": 26
+    },
+    {
+        "spent": "1wtsayz1y0jc01mwyj4g87j8dxqra2cwnx2zams9sf0vg0hskf009dg01",
+        "pledgefee": 50,
+        "pool_addr": "20g07zvqs9zcjk9690x5a3b3b0a9hcf4v92vqdfgey0g9jhkn9pv38gp6",
+        "mint_addr_index": 27
+    },
+    {
+        "spent": "12sgnph02j3edepcrttgc6dfte5ddajjkaxbzspkj4ns66na5t909htq0",
+        "pledgefee": 50,
+        "pool_addr": "20g09r16bbxasqcjrkkfx0hjk98r0bx9zcgvzxaxgp6h2bbq3fm4ennzg",
+        "mint_addr_index": 28
+    },
+    {
+        "spent": "1y33ss18bbxcj4t1164kkzg8s2d195z1b66kewqseynnz8mvp50cd6zk3",
+        "pledgefee": 50,
+        "pool_addr": "20g04qh26296cxxwyc74wxf9w1kxsmeswgj7j4sbsy2gemsenc9cfsw4f",
+        "mint_addr_index": 29
+    },
+    {
+        "spent": "17h428zvpcz3z2nxjdtb6dzef0vtb41s6709yg14z00t86vw6jr08fs0d",
+        "pledgefee": 50,
+        "pool_addr": "20g06b2drx6yzpvxk5d7ks393sxxd739zxwj635n7wa35vxaq17ynv9jm",
+        "mint_addr_index": 30
+    },
+    {
+        "spent": "1x60175rhjb2xvpdj5jrt9ye1yhznxrwdb3zqkm8asrs8z28j7qzm0csy",
+        "pledgefee": 50,
+        "pool_addr": "20g0292wvqer3e0yk4zzrmvn61ysc3x5kmsyvn5gdkx7c8nn8xgg2yg2n",
+        "mint_addr_index": 31
+    },
+    {
+        "spent": "1cv2rd7t5e5xhtt3nrts9bysfghdj8bjxjzqsxxzrs9r6pqpzseh6wn1f",
+        "pledgefee": 50,
+        "pool_addr": "20g00bj28bg57emkws1w0nn8m125f6wrjq8e6pyscjpxr0xwv0qswv4tg",
+        "mint_addr_index": 32
+    },
+    {
+        "spent": "1s1fn5ndmsyw600zmxw2jkz06hfsftvscvfaf0esce0kqzvcw5jjhs2d5",
+        "pledgefee": 50,
+        "pool_addr": "20g087zr65s9gxk37cvrna1649m9ryb69hpb0pb1w8ezbrfpt5a7ekvgj",
+        "mint_addr_index": 33
+    },
+    {
+        "spent": "17pnagb8j63phqgrccgmkxwmsdt7qf791n569dd38jey9gc8ktxcmb5c4",
+        "pledgefee": 50,
+        "pool_addr": "20g07yh863nq6yw9g2s3mzn53tre31ty0jhrxwq0t1bxcy3sb132fypsa",
+        "mint_addr_index": 34
+    },
+    {
+        "spent": "1k5n6371nrnzhbqd6tj875fev14xe6jxhpkt4173e3c9wthqj1nj3syj5",
+        "pledgefee": 50,
+        "pool_addr": "20g08eses9hkn3t5ktb3gt5dhe1s1hnrec7hne7e6055enxaykz8rd9tt",
+        "mint_addr_index": 35
+    },
+    {
+        "spent": "1vp9nejhjypv0a60gks01x6zta7ppp1nhpprmax33rrfz2pq69r44360n",
+        "pledgefee": 50,
+        "pool_addr": "20g0ey4wnmnwj2xh5c0rdcn3s5d92x34re49mfnh7wtmcp7ayjdd3jmc6",
+        "mint_addr_index": 36
+    },
+    {
+        "spent": "1wyp9517crgjj08t8bkweht13cg4q5dgcgx2j8ae125y63f6rk5hn1k9y",
+        "pledgefee": 50,
+        "pool_addr": "20g05hjgdy3r13tnx8rzdqhcf3kekbza5m8kj1gr2wp19vhr87cv3knh3",
+        "mint_addr_index": 37
+    },
+    {
+        "spent": "1zgad5atm7dd8n5pr30e78rfg0cdhm1vq6bxk8ghjfbbj90n44erq0ynz",
+        "pledgefee": 50,
+        "pool_addr": "20g0bcc4d2659fh9pv6e06y1tzk0ryarbj26cwva9pyp8trskr5mppzs5",
+        "mint_addr_index": 38
+    },
+    {
+        "spent": "1yh31k243cas3satq5z1w20gcjj13f2v9r69shs20s4z5f7pjx3txmcvd",
+        "pledgefee": 50,
+        "pool_addr": "20g0cm7v1nc5yq92cce914axce89v810ct015cp0kvep9z6x1x53tv0t9",
+        "mint_addr_index": 39
+    },
+    {
+        "spent": "1gvyce7evyv1w41501xb9xbpx75wfgsxmm4ebqeybrhagaxg4heq090gj",
+        "pledgefee": 50,
+        "pool_addr": "20g02tpyv8p8cpte5nap873s6379va2et5pb9wapv02qj3m588tz3cb0k",
+        "mint_addr_index": 40
+    },
+    {
+        "spent": "12g0dcyyknp4t0vdqsarc85phpsae0ywc4dxv75nkc57r82pdqkfph48f",
+        "pledgefee": 50,
+        "pool_addr": "20g00tepshgtq5z26qtt3fz4f6a4v3myn0w5sw5fz76d5njzqm3m96ntt",
+        "mint_addr_index": 41
+    },
+    {
+        "spent": "1x9xgy6d1r1j77mydph30024zp8ne0x7hv7dyvx9nwgmb3kxfnxym6thz",
+        "pledgefee": 50,
+        "pool_addr": "20g0bxs5n12jt82gdf3ydsmtmecswyvhxpp551wdfvr3xvbw6p3d9mr8z",
+        "mint_addr_index": 42
+    },
+    {
+        "spent": "1vd6z0de3c1yj89qaf9dykdaeqtz88824qhbswk8xe3wra1g62km3msh2",
+        "pledgefee": 50,
+        "pool_addr": "20g02qfwetkp6h9yzv7q3jm49gwbz94ygsjv1mwnzgy6ktv2yhv57qte5",
+        "mint_addr_index": 43
+    },
+    {
+        "spent": "1kvd0pxy0146de8pj0546ap22fzt7w5h5dcg47vvmn7skadp9cjrgkq64",
+        "pledgefee": 50,
+        "pool_addr": "20g033ctazq42cne92h0pfs14yzde2rtaf90wy5fz5p9gt8r3a8eeh7bf",
+        "mint_addr_index": 44
+    },
+    {
+        "spent": "1je5z3gtne21eb3d1txy124n5ebhbcw1efvbj41h4e6dv8sh4ch3excs3",
+        "pledgefee": 50,
+        "pool_addr": "20g06b6pbe3v9fxatxqnty4eppwm496jf4vfmv8sg41zyk80ge3jk71y0",
+        "mint_addr_index": 45
+    },
+    {
+        "spent": "1awwz4mmfbc156cxf4eabnmqxen7ck43w2rbn4e2e1e4kxjcthsbx2r0e",
+        "pledgefee": 50,
+        "pool_addr": "20g006ec47zh9bjnjxpmxvvf3gjx9x8ep7pbyhanb9dyvrpxhtvtr0pk8",
+        "mint_addr_index": 46
+    },
+    {
+        "spent": "1y69m84a2z2jr52zm41qxxw5pcam4tkv7yyfqtc0w9sx1cyvtrexfjmrn",
+        "pledgefee": 50,
+        "pool_addr": "20g0cr00qegqrrar7eam15phgxabbjpr0n4y94cjb9vtsvcdsnac9edsk",
+        "mint_addr_index": 47
+    },
+    {
+        "spent": "1mnmek03mj47wgx7b6rpahwbhv08fe6sc57pwemkyht9kmxqwt6aqaskh",
+        "pledgefee": 50,
+        "pool_addr": "20g0bbr1k3ybf7p1zv3pna8bs6kmawxzrjmvnjrwh5rpq5mb0966zwwpj",
+        "mint_addr_index": 48
+    },
+    {
+        "spent": "1xzzx4qewv11wdre0ftgzenpdt9m5xxph2g3jwat03n551m8ksvhv5k9e",
+        "pledgefee": 50,
+        "pool_addr": "20g04nsy9k40mbw1r01hd95ksvdcxw9ghc39a3ra7yk0c9w5rvwaa9tan",
+        "mint_addr_index": 49
+    },
+    {
+        "spent": "1nx4pfpcvky4vzxh9r7cfdchcawzcvfbs6dej68ef1zxb5zry2np7b8sm",
+        "pledgefee": 50,
+        "pool_addr": "20g0avf8e21ff2h95ct68x2dbhpmm3tmm43k96vjgp7bf749z856xwnxk",
+        "mint_addr_index": 50
+    },
+    {
+        "spent": "120dnw3p8andebtv0e2e5n4hvch4dtnft6ngv2nnqrtmgpmefjkzjgfm4",
+        "pledgefee": 50,
+        "pool_addr": "20g07nkhrp8ma2q2v9ttq02bxen70zfrvnj1mt8am37xcmxpm02ny6w16",
+        "mint_addr_index": 51
+    },
+    {
+        "spent": "128p17s0sfp5r2mxve9z8g4jqbdj8tp6nahnpwg7aejwwn28axewtbtv5",
+        "pledgefee": 50,
+        "pool_addr": "20g0fqzxh7074p22e2y0d79e77mkx42gb1xa64cmebdj1zc17177pzv14",
+        "mint_addr_index": 52
+    },
+    {
+        "spent": "15yjjk7sf2zrrfh8w01hggvqh5j5rjdy675dc2zmcyj59t4sd42y13chm",
+        "pledgefee": 50,
+        "pool_addr": "20g04b4v1rkybzf1vq2czcb08p748nmzh9v1kktdte9t0cgmbcqmq73jf",
+        "mint_addr_index": 53
+    },
+    {
+        "spent": "1yx5w166e5cymfeqwg8w7n64n259s3ajd47afx0tah06p57d64x9q5hw1",
+        "pledgefee": 50,
+        "pool_addr": "20g0ceys597wk7a8a674ab237jnnc2egzwtam21jp6bqzqzzb0d081bzm",
+        "mint_addr_index": 54
+    },
+    {
+        "spent": "1jsbzghaj7mns2cqtwcv4d1cxktrc8714640gppcyszae6j23h0p1w29s",
+        "pledgefee": 50,
+        "pool_addr": "20g0dtcyj2a3jthdkrame253d5nnj3wx5z193qgcdeb8271qdbxxh9ngw",
+        "mint_addr_index": 55
+    },
+    {
+        "spent": "1jfm4rw16jkhx6vkvpnh4c31352j8y0v4jekngaypv5915qry02bbsb5b",
+        "pledgefee": 50,
+        "pool_addr": "20g00y7z2znzqejneerafgzknq02rkc0qv7xjbh22d2g47njymq36v5d3",
+        "mint_addr_index": 56
+    },
+    {
+        "spent": "1jvcjqz82ndternr7seh7efcfms31j766zge9c1g97gpt4d8n7tapge0y",
+        "pledgefee": 50,
+        "pool_addr": "20g04216n90anca8s3kanx1r1ckq3tkfrktwtfmcbqse2kxzb5xn27tfc",
+        "mint_addr_index": 57
+    },
+    {
+        "spent": "1bwg138xccdsnysq40ncnf8xjbdj2d040txv9naxg5tdejcmd5vreaksc",
+        "pledgefee": 50,
+        "pool_addr": "20g04c6y43cp74bp8vvz1t65hpyeyrvy8kprs7h5rkksg87k5g2mk9vny",
+        "mint_addr_index": 58
+    },
+    {
+        "spent": "1fxgrep9jzgpsp1q399wrs95s3kkmmdy1b912f5h049q3rwvsv250nass",
+        "pledgefee": 50,
+        "pool_addr": "20g050pm7wxrynyxb7cnx0013xa5ee5k4g2f9yjt0ep2w6g15ds978dqb",
+        "mint_addr_index": 59
+    },
+    {
+        "spent": "1b0631n296q2vd3a2vgacjhaae9ht53swb4jcy3z9wwgrr2jtg7njedp6",
+        "pledgefee": 50,
+        "pool_addr": "20g0bvexnj8nws943g04e8p87yzek6emddybmmp1651chxsprpdrch2bj",
+        "mint_addr_index": 60
+    },
+    {
+        "spent": "1h39qndnzw9w7ep6a81fr7k7c9gcjxtjwcmx02enjxx82eqg2awp3jmwx",
+        "pledgefee": 50,
+        "pool_addr": "20g03hgrm3a8tkp7j0wpb7rz6svn2szzxsjzr76rgmjys9kf07sajw7sw",
+        "mint_addr_index": 61
+    },
+    {
+        "spent": "18c86efkgtj66y94vkrmpfc6hqapkq5etg01ngesgzbrg28zpqqc8q5t4",
+        "pledgefee": 50,
+        "pool_addr": "20g0arb9ecrht0vdqygqtgqypgqfbea8h2nd99tnhk399eqr9b6fwyaws",
+        "mint_addr_index": 62
+    },
+    {
+        "spent": "16t3dwjc7rhyqn0exdb62dbde71z5pgawmth35farq1ss838z24xnja0g",
+        "pledgefee": 50,
+        "pool_addr": "20g0f66hwd9tq4zdv0vjb0abdjj3r35xxs0t049m160d1xhbrprv59vz2",
+        "mint_addr_index": 63
+    },
+    {
+        "spent": "1yrk29nvcrdkdzx1nxsjz1jkcdcsx3nah52dr76jt63490jnjnttw49m1",
+        "pledgefee": 50,
+        "pool_addr": "20g0b8tacekq8s3f61djazh88gjpwrej1j9t132d0rcp57g65zg4zwpd9",
+        "mint_addr_index": 64
+    },
+    {
+        "spent": "1cq6hmrr3az7r9xssyjyjj87e8bdggg4vqrw43fxeccvghpxq0y5va93s",
+        "pledgefee": 50,
+        "pool_addr": "20g07n551pr4frn74zas2m2jjc3h1eyk7szw3b9gnj0ya7b4ggx955kfd",
+        "mint_addr_index": 65
+    },
+    {
+        "spent": "1ychxhrex3s2w3v792snj2ekbnj9996r3xeexga2vpc5gfn6eqprj1nq6",
+        "pledgefee": 50,
+        "pool_addr": "20g08bfdmvcf71r5qb4qnr1nr3wwaase55ctnrswgdjaf06ww0nbshpp5",
+        "mint_addr_index": 66
+    },
+    {
+        "spent": "17dr8mxkxvgjk1485jhf5jebxmc2p2ygat9ddbxekenmhzv3gww0dzfxw",
+        "pledgefee": 50,
+        "pool_addr": "20g0bs69nw2pg6p1h2sef5sthdh1f7jg95eft7h86vgkjdtrc05sxpazy",
+        "mint_addr_index": 67
+    },
+    {
+        "spent": "1pfv0a8qrfsm5rwgcxbwypvkb142fqgn6e77z5cmg9cyg97d39219k6mq",
+        "pledgefee": 50,
+        "pool_addr": "20g0fshyadeh35wbb8rxs93pbv4e6dgnbvg55sn6f76etnsx15ydcqr94",
+        "mint_addr_index": 68
+    },
+    {
+        "spent": "1epazy1xmrc1yhcq3gqva54xjyg9jf5y4hjystsv805a2sh1x9ddx50dk",
+        "pledgefee": 50,
+        "pool_addr": "20g08e9k4yjvrprq9mwg3k2a56z1brpnac6py2m9f6ex0rwmxpkzg9r9z",
+        "mint_addr_index": 69
+    },
+    {
+        "spent": "1b1c1azs9xap45rm808meq2xsk15enwdy45hmt04fxydke86s7y0zb14g",
+        "pledgefee": 50,
+        "pool_addr": "20g06jcwqm7mmepjb4j9qh6b9s08f1gdan4jjv1ymff2fx80f01xaknh1",
+        "mint_addr_index": 70
+    },
+    {
+        "spent": "1bf22hy7n031n0h4kk7rqqkjbp83zntez417fkjch14m9znnsjax1svws",
+        "pledgefee": 50,
+        "pool_addr": "20g0epvjx6snc6x2ctxdz6yyrmqj1c6z9adkfvapj3z1q230hmvaehj7k",
+        "mint_addr_index": 71
+    },
+    {
+        "spent": "1rpf82prr5fgc78vbdsx8018dsw07ttq1fc1b2dyw61yqxgk4ejxkgax9",
+        "pledgefee": 50,
+        "pool_addr": "20g0dtj98d93qme2908hqcn78vt1nk9qmyybm3g5841hxdqy8etpvszqz",
+        "mint_addr_index": 72
+    },
+    {
+        "spent": "1ragwan1zre0pcjp0yh9gkzk0twnz3trnvhchh8cbcvzk4k68qb35zc19",
+        "pledgefee": 50,
+        "pool_addr": "20g00pq5sep7wd6vwzb744tagw9afm027e7yhtnnxtjzrgym5n8x0mpr5",
+        "mint_addr_index": 73
+    },
+    {
+        "spent": "1mr8zdnyyeq5dx68gwfe2vf0g6wv81zqbdrds6rpc3jc9bfqa7n3bvjq2",
+        "pledgefee": 50,
+        "pool_addr": "20g0a4g1jwer5mrs0ed0a1mcqhrjsvee5hpv6f25fe2nwarxkjqtzqscw",
+        "mint_addr_index": 74
+    },
+    {
+        "spent": "14dwpcszanb98fyqsjk1famxtmv4053zzk6ch3yay97atn17ahydsx7g3",
+        "pledgefee": 50,
+        "pool_addr": "20g0dhz9nadcpqrwnadsxjea3mnm4jg47c494a749a2p6268w89rdzvxj",
+        "mint_addr_index": 75
+    },
+    {
+        "spent": "19jechp2qf3pbcb9cqta8b9fgn3n5d8xch27syvz14kzh0wq8dgcphbma",
+        "pledgefee": 50,
+        "pool_addr": "20g00p05ex5bszp7kk7s49np9pjfj9bc7fcg08qfkk08x48f985fzwk9w",
+        "mint_addr_index": 76
+    },
+    {
+        "spent": "1tee0s68wwcm7r7wee0wwpnhn62w3cdypzgva1kdfn84hk8gxv2wgabjh",
+        "pledgefee": 50,
+        "pool_addr": "20g050wq3faqn5nbh8web124qzt9stkygz9pc4pgbq2446h0r90va7kpf",
+        "mint_addr_index": 77
+    },
+    {
+        "spent": "1dskf4cpznfp4ezav1e0ymjfhhfn5h59902ek047ymet2dd5f9135xtkt",
+        "pledgefee": 50,
+        "pool_addr": "20g055ebj80vcvegvjzwjr5xqntbzcf3bj0506t11akyt4bkyg2ev3pak",
+        "mint_addr_index": 78
+    },
+    {
+        "spent": "1bx6bjzp8degxxgzz94a2ygb3rxa8912v07p4r3akshthrk55nnjvmbte",
+        "pledgefee": 50,
+        "pool_addr": "20g07jgx4pkt08dsmkyv1q0yveda2qazjgcffhg31j98jsqmmpvyzjet7",
+        "mint_addr_index": 79
+    },
+    {
+        "spent": "16t6n2sq7xbhjsv0y1fgxdd7j10sy9wpg009ewq7mhtq3km0tw4yrp9ts",
+        "pledgefee": 50,
+        "pool_addr": "20g01r8sfte6f23h59nhpd6x7a9v7c58gk2k7ba132kkecg1j8e2mhdc3",
+        "mint_addr_index": 80
+    },
+    {
+        "spent": "15x51hryhjwsyvvfwzdts7z39xv4wwxn0eaa8ejwba0r101e00cagrhje",
+        "pledgefee": 50,
+        "pool_addr": "20g038m9rv789grx2kd77w3sfq8rvq83pn6jan4kp3wmph13dyvb159te",
+        "mint_addr_index": 81
+    },
+    {
+        "spent": "1z4rfnssqmsqhpprcjyad5v277z5atj8czpnr84vbh30ezrn7k66c0r0q",
+        "pledgefee": 50,
+        "pool_addr": "20g059x8s0pmxmmct04da4yvfmjgk9hwqvmtqk92myrrax5bjaggg45ht",
+        "mint_addr_index": 82
+    },
+    {
+        "spent": "1et5na3w6q7jga72m0vca22v9wbdgt21e48r44szkvs7k35wjm6v13ftw",
+        "pledgefee": 50,
+        "pool_addr": "20g0278j94xax33a2w0dndr1w5m9zejx8r9hjxsmtxqyzr67fjknn8gd4",
+        "mint_addr_index": 83
+    },
+    {
+        "spent": "18cfxgenkmrbe0bb5v9b6d94v4ynsdb1fva6rrb5petptf6kty1td0k12",
+        "pledgefee": 50,
+        "pool_addr": "20g0cxe54jn7swg3deqz2jvq2d34k339tvf1k87rwm0xb6vwk8ewg4drt",
+        "mint_addr_index": 84
+    },
+    {
+        "spent": "18f411kqt6n1cesnysbfw7g8n9h9h31xp0tpja1f59whhv2p2d5bf3zch",
+        "pledgefee": 50,
+        "pool_addr": "20g023qsprakp7def8b337ak9yz0a1xk22tkszny5czve3kep721vhtf5",
+        "mint_addr_index": 85
+    },
+    {
+        "spent": "1r3a6g91gdjyyzntnsbxarxx8pykq2hftbm2g5s9s7gpq9zxnjmnn044b",
+        "pledgefee": 50,
+        "pool_addr": "20g08s8x584v2nms6xy1dcdcq89n799dyx2gvec9wk93t3hvvre5nh5jf",
+        "mint_addr_index": 86
+    },
+    {
+        "spent": "180ct322r6vzk4pj17v96xm7nkghvj8fp2j4hdn4cjxkgk90fa1mjh2np",
+        "pledgefee": 50,
+        "pool_addr": "20g0ay52x5x3x04p29xwdbrvpetdtwa5ebqmfny6w9x6j3xjjwn01tach",
+        "mint_addr_index": 87
+    },
+    {
+        "spent": "110hpzm382jg6v68rx9akkvhdbx8x6a403engsjn4bt39sjk195dy8k2j",
+        "pledgefee": 50,
+        "pool_addr": "20g0ese25hh2vrajc6vkyfm9bkrf8rd1wxyh95wx4dvmads96v97fbpct",
+        "mint_addr_index": 88
+    },
+    {
+        "spent": "19e4kqjy16fr0pqxgna0exrz4f4n55z5xne0ckhn68hcrvndz6jh2e42w",
+        "pledgefee": 50,
+        "pool_addr": "20g0cgt5ja3j94ryw04ht85jgsgyft1c3xk9jpstyv49c6ryr6sabb82b",
+        "mint_addr_index": 89
+    },
+    {
+        "spent": "10pzjcjwp93eyc5cqd84j8g4enkant6he2075hxebn9pa6256vagmhk6y",
+        "pledgefee": 50,
+        "pool_addr": "20g04rxt2entja75yj1vnxf1yeza0561cnk70wn4c6n4xt20xrzhabshk",
+        "mint_addr_index": 90
+    },
+    {
+        "spent": "16pkdswbsk0yhqrtxv9pe8gycq57gkzgh7vwfet9d8wk60x4jsnt13dbb",
+        "pledgefee": 50,
+        "pool_addr": "20g0ems0cs7bga90541tmzn60238ze5tvsbk9vtp8jkynxp8sxajvg1w1",
+        "mint_addr_index": 91
+    },
+    {
+        "spent": "1tmgpv8mk66y06335fwfx19z1radqx5qpnh9ywnegb1v72rppd6m44rd0",
+        "pledgefee": 50,
+        "pool_addr": "20g095s2ya4j0ve4kenx094578zfrtrpjdvkvk57cyjmjhrmrvr53fprx",
+        "mint_addr_index": 92
+    },
+    {
+        "spent": "1ym8pma6w71epp61hhhqcwetb2cqqktj1w641p7ndf9bt8vbfcmqc5bsx",
+        "pledgefee": 50,
+        "pool_addr": "20g05b4qkgdj7wnw0cg45jb101t4etxp2wpmxnnva56t5j2qb4d9jwb5j",
+        "mint_addr_index": 93
+    },
+    {
+        "spent": "1ryj79008k9qx6gdv1cw6hrh3pgqb1zhqpdt987m1cbjtpwb3w9y78pxe",
+        "pledgefee": 50,
+        "pool_addr": "20g065hx924rgrkgbg04xbq7tpzvq4v4dv8vcqhdfprefdt9w5p8rj6qa",
+        "mint_addr_index": 94
+    },
+    {
+        "spent": "1acb3xkhaa22k8dxgyabj5tq6hpfj4ak4txxejxtmskp7ppchqte55paf",
+        "pledgefee": 50,
+        "pool_addr": "20g09b523ddjrsf1b17zsnjxa2vkg86pf6b6s5vahcdbaptt0t54hjtaq",
+        "mint_addr_index": 95
+    },
+    {
+        "spent": "1jj4vepzasp178yp1581175hbcv79teb7cvrd95q45zhj5sj2rqvc6dpx",
+        "pledgefee": 50,
+        "pool_addr": "20g07pt3jt9y25nz5sx30gr6hbzfqvabv1g8d6wwscxpzaw17zrpkgeg7",
+        "mint_addr_index": 96
+    },
+    {
+        "spent": "1nrjfkg2kkhhsb06n1n2x8ze99dz2r0tch3a9rt8ze1wh1acjyy3ng4rp",
+        "pledgefee": 50,
+        "pool_addr": "20g089cyrw99shdd7jacc390kqrxggrcgdhhbh95sc70wmrpbx5747hbf",
+        "mint_addr_index": 97
+    },
+    {
+        "spent": "1zhjahmzgsrv60wbdjfn52zc6jb29mectpf9y9dsw7dpvcjqawzn1dy5q",
+        "pledgefee": 50,
+        "pool_addr": "20g0cvaj3g69htgnxz9bjq043ngk9qpjzxjr6z8hrm6ke9kajavdbhspr",
+        "mint_addr_index": 98
+    },
+    {
+        "spent": "1365s39gr12tjxc2vdgpnzzx666w6vwj0akbz327x3maf3nk9er21fh41",
+        "pledgefee": 50,
+        "pool_addr": "20g02h193zyf5tzyqzqj508jm6b3bdjnzz7gb6kktky1sbagcs8k6ywfe",
+        "mint_addr_index": 99
+    }
+]
+}
         }
     ],
     "p2p": {
