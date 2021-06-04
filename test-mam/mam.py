@@ -102,7 +102,7 @@ def InsertTx(block_id,tx,cursor):
     txfee = Decimal("%.6f" % tx["txfee"])
     if in_money > (amount + txfee):
         amount = in_money - (amount  + txfee)
-        sql = "insert Tx(block_hash,txid,`from`,`to`,amount,fee,`type`,n,data,transtime)values(%s,%s,%s,%s,%s,%s,%s,%s,1,%s,%s)"
+        sql = "insert tx(block_hash,txid,`from`,`to`,amount,fee,`type`,n,data,transtime)values(%s,%s,%s,%s,%s,%s,%s,1,%s,%s)"
         cursor.execute(sql,[block_id,tx["txid"],tx["sendfrom"],tx["sendfrom"],amount,0,tx["type"],data,tx["time"]])
 
 def RollBACK(block_hash):
