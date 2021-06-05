@@ -245,7 +245,7 @@ module.exports = function(logger){
     app.get('/key.html', function(req, res, next){
         res.end(keyScriptProcessed);
     });
-    /*
+    
     app.get('/btc2mam', function(req, res, next){
         var client = redis.createClient(portalConfig.redis.port, portalConfig.redis.host);
         client.hgetall("bitcoin:btc2mam", function(err, data) {
@@ -270,7 +270,7 @@ module.exports = function(logger){
             res.send(data);
           }});
     });
-    */
+    
     app.get('/:page', route);
     app.get('/', route);
 
