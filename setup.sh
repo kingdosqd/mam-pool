@@ -1,5 +1,3 @@
 #!/bin/bash
-
-cp -r ./stratum-pool/ ../nomp-mam/node_modules/
-cp -r ./poolWorker.js ../nomp-mam/libs/
+cp -r ./stratum-pool/ ./nomp/node_modules/
 echo "setup OK!"
